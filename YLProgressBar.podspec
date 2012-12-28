@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name      = 'YLProgressBarFork'
+  s.name      = 'YLProgressBar'
   s.version   = '1.0.0'
   s.platform  = :ios
   s.license   = 'MIT'
