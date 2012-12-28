@@ -59,6 +59,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
+   CGRect frame = self.progressView.frame;
+   frame.size.height = 30;
+   [self.progressView setFrame:frame];
+   
+   self.progressView.verticalDarkGradient = YES;
+   
+   self.progressView.whiteStripes = YES;
+   
+   
+   self.progressView.progressTintColor = [UIColor colorWithRed:253/255.0 green:205/255.0 blue:64/255.0 alpha:1];
+   self.progressView.progressSecondTintColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:10/255.0 alpha:1];
+   
+   self.progressView.stripeWidth = 12;
+   self.progressView.distanceBetweenTopAndBottomRightCorner = 20;
+   self.progressView.progressImageInset = 2;
+   
+   self.progressView.progress = 0;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -108,27 +126,7 @@
 
 - (IBAction)colorButtonTapped:(id)sender
 {
-    UISegmentedControl *seg = (UISegmentedControl*)sender;
-    switch (seg.selectedSegmentIndex) {
-        case 0:
-            progressView.progressTintColor = [UIColor purpleColor];
-            break;
-        case 1:
-            progressView.progressTintColor = [UIColor redColor];
-            break;
-        case 2:
-            progressView.progressTintColor = [UIColor cyanColor];
-            break;
-        case 3:
-            progressView.progressTintColor = [UIColor greenColor];
-            break;
-        case 4:
-            progressView.progressTintColor = [UIColor yellowColor];
-            break;
-            
-        default:
-            break;
-    }
+   progressView.progressTintColor = [UIColor colorWithRed:253/255.0 green:205/255.0 blue:64/255.0 alpha:1];
 }
 
 #pragma mark YLViewController Private Methods

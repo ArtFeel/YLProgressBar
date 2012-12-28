@@ -40,6 +40,30 @@
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
 @property (nonatomic, retain) UIColor *progressTintColor;
+@property (nonatomic, retain) UIColor *progressSecondTintColor;
+
+// by default, is horizontal
+@property (nonatomic, assign) BOOL verticalDarkGradient;
+
+// by default black
+@property (nonatomic, assign) BOOL whiteStripes;
+
+// by default, hide
+@property (nonatomic, assign) BOOL showGloss;
+
+// by default 7
+@property (nonatomic, assign) NSInteger stripeWidth;
+
+// you can make stripes vertical, set 0
+// or with small angle, set 8
+// or with large angle, set 20
+@property (nonatomic, assign) NSInteger distanceBetweenTopAndBottomRightCorner;
+
+// by default 1
+@property (nonatomic, assign) NSInteger progressImageInset;
+
+// by default, 1/2 of height
+@property (nonatomic, assign) CGFloat cornerRadius;
 
 #pragma mark Constructors - Initializers
 
