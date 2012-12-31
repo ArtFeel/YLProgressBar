@@ -171,6 +171,10 @@
                                                                  selector:@selector(setNeedsDisplay)
                                                                  userInfo:nil
                                                                   repeats:YES];
+           
+           
+           // add to runloop
+           [[NSRunLoop currentRunLoop] addTimer:self.animationTimer forMode:NSDefaultRunLoopMode];
         }
     } else
     {
