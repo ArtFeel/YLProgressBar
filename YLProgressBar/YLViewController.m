@@ -78,7 +78,7 @@
    
    self.progressView.progress = 0;
    
-   //[self.progressView showProgress:0.5 animated:YES];
+//   [self.progressView showProgress:0.5 animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

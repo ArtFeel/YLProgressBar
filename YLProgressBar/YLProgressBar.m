@@ -188,8 +188,8 @@
 }
 
 
-- (void)showProgress:(CGFloat)progress animated:(BOOL)animated {
-   if (animated) {
+- (void)showProgress:(CGFloat)progress animated:(BOOL)aanimated {
+   if (aanimated) {
       [self showAnimatedProgress:@(progress)];
    } else {
       [self setProgress:progress];
@@ -198,12 +198,26 @@
 
 
 - (void)showAnimatedProgress:(NSNumber *)progress {
-   [self setProgress:self.progress + 0.01];
+   [self setProgress:self.progress + self.animationTrackProgressIncrement];
    if (self.progress < [progress floatValue]) {
-      [self performSelector:@selector(showAnimatedProgress:) withObject:progress afterDelay:0.001];
+      [self performSelector:@selector(showAnimatedProgress:) withObject:progress afterDelay:self.animationTrackProgressDelay];
    }
 }
 
+
+- (CGFloat)animationTrackProgressIncrement {
+   if (!_animationTrackProgressIncrement || _animationTrackProgressIncrement == 0) {
+      _animationTrackProgressIncrement = 0.01;
+   }
+   return _animationTrackProgressIncrement;
+}
+
+- (CGFloat)animationTrackProgressDelay {
+   if (!_animationTrackProgressDelay || _animationTrackProgressDelay == 0) {
+      _animationTrackProgressDelay = 0.0001;
+   }
+   return _animationTrackProgressDelay;
+}
 
 #pragma mark YLProgressBar Private Methods
 

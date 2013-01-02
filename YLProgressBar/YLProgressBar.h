@@ -69,6 +69,13 @@
 // by default, 1/2 of height
 @property (nonatomic, assign) CGFloat cornerRadius;
 
+// by default 0.01
+@property (nonatomic, assign) CGFloat animationTrackProgressIncrement;
+
+// by default 0.0001
+@property (nonatomic, assign) CGFloat animationTrackProgressDelay;
+
+
 #pragma mark Constructors - Initializers
 
 #pragma mark Public Methods
