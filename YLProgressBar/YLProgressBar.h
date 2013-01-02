@@ -25,6 +25,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ARCMacro.h"
 
 @interface YLProgressBar : UIProgressView
 {
@@ -37,6 +38,9 @@
     CGFloat     cornerRadius;
     NSTimer*    animationTimer;
 }
+
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
+
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
 @property (nonatomic, retain) UIColor *progressTintColor;

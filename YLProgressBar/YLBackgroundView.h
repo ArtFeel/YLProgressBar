@@ -26,7 +26,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YLBackgroundView : UIView
+@interface YLBackgroundView : UIScrollView
 {
 @protected
     UIImage *noizeImage;

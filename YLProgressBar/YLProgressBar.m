@@ -37,7 +37,6 @@
     UIColor* _progressSecondTintColor;
 }
 @property (nonatomic, assign)               double      progressOffset;
-@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
 
 /** Init the progress bar. */
 - (void)initializeProgressBar;
