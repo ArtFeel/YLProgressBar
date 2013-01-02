@@ -73,4 +73,9 @@
 
 #pragma mark Public Methods
 
+// we can't use
+// - (void)setProgress:animated:YES;
+// because there's drawRect method in progress view inside
+- (void)showProgress:(CGFloat)progress animated:(BOOL)animated;
+
 @end

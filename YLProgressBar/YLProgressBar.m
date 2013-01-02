@@ -187,6 +187,24 @@
     }
 }
 
+
+- (void)showProgress:(CGFloat)progress animated:(BOOL)animated {
+   if (animated) {
+      [self showAnimatedProgress:@(progress)];
+   } else {
+      [self setProgress:progress];
+   }
+}
+
+
+- (void)showAnimatedProgress:(NSNumber *)progress {
+   [self setProgress:self.progress + 0.01];
+   if (self.progress < [progress floatValue]) {
+      [self performSelector:@selector(showAnimatedProgress:) withObject:progress afterDelay:0.001];
+   }
+}
+
+
 #pragma mark YLProgressBar Private Methods
 
 - (void)initializeProgressBar
