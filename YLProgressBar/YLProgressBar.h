@@ -41,6 +41,8 @@
 
 @property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    animationTimer;
 
+@property (nonatomic, SAFE_ARC_PROP_RETAIN) NSTimer*    growingTimer;
+
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
 @property (nonatomic, retain) UIColor *progressTintColor;
@@ -84,5 +86,8 @@
 // - (void)setProgress:animated:YES;
 // because there's drawRect method in progress view inside
 - (void)showProgress:(CGFloat)progress animated:(BOOL)animated;
+
+
+- (void)showAnimatedProgressWithTimer:(CGFloat)progress;
 
 @end

@@ -56,7 +56,7 @@
 @end
 
 @implementation YLProgressBar
-@synthesize progressOffset, cornerRadius, animationTimer;
+@synthesize progressOffset, cornerRadius, animationTimer, growingTimer;
 @synthesize animated;
 
 - (void)dealloc
@@ -67,6 +67,15 @@
     }
     
     SAFE_ARC_RELEASE (animationTimer);
+   
+   if (growingTimer && [growingTimer isValid])
+   {
+      [growingTimer invalidate];
+   }
+   
+   SAFE_ARC_RELEASE (growingTimer);
+   
+   
     SAFE_ARC_RELEASE (_progressTintColor);
     SAFE_ARC_RELEASE (_progressSecondTintColor);
     
@@ -205,6 +214,29 @@
 }
 
 
+
+- (void)showAnimatedProgressWithTimer:(CGFloat)progress {      
+      self.growingTimer = [NSTimer scheduledTimerWithTimeInterval:self.animationTrackProgressDelay
+                                                             target:self
+                                                         selector:@selector(animateWithTimer:)
+                                                           userInfo:nil
+                                                            repeats:YES];
+      
+      
+      // add to runloop
+      [[NSRunLoop currentRunLoop] addTimer:self.growingTimer forMode:NSDefaultRunLoopMode];
+      [[NSRunLoop currentRunLoop] addTimer:self.growingTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)animateWithTimer:(NSTimer *)timer {
+   [self setProgress:self.progress + self.animationTrackProgressIncrement];
+   
+   if (self.progress >= 1) {
+      self.progress = 0;
+   }
+}
+
+
 - (CGFloat)animationTrackProgressIncrement {
    if (!_animationTrackProgressIncrement || _animationTrackProgressIncrement == 0) {
       _animationTrackProgressIncrement = 0.01;
@@ -214,7 +246,7 @@
 
 - (CGFloat)animationTrackProgressDelay {
    if (!_animationTrackProgressDelay || _animationTrackProgressDelay == 0) {
-      _animationTrackProgressDelay = 0.0001;
+      _animationTrackProgressDelay = 0.01;
    }
    return _animationTrackProgressDelay;
 }
@@ -225,6 +257,7 @@
 {
     self.progressOffset     = 0;
     self.animationTimer     = nil;
+   self.growingTimer = nil;
     self.animated           = YES;
     self.stripeWidth = 7;
     self.distanceBetweenTopAndBottomRightCorner = 8;

@@ -40,11 +40,15 @@
 {
     [super viewDidLoad];
 	
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.3f 
+    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.03f
                                                            target:self 
                                                          selector:@selector(changeProgressValue)
                                                          userInfo:nil
                                                           repeats:YES];
+   
+   // add to runloop
+   [[NSRunLoop currentRunLoop] addTimer:self.progressTimer forMode:NSDefaultRunLoopMode];
+   [[NSRunLoop currentRunLoop] addTimer:self.progressTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)viewDidUnload
@@ -78,8 +82,68 @@
    
    self.progressView.progress = 0;
    
-//   [self.progressView showProgress:0.5 animated:YES];
+//   self.progressView.animationTrackProgressDelay = 0.01f;
+//   self.progressView.animationTrackProgressIncrement = 0.01f;
+//   [self.progressView showProgress:1 animated:YES];
+//   
+   
+   CGRect frame2 = self.progressView2.frame;
+   frame2.size.height = 30;
+   [self.progressView2 setFrame:frame2];
+   
+   self.progressView2.verticalDarkGradient = YES;
+   
+   self.progressView2.whiteStripes = YES;
+   
+   
+   self.progressView2.progressTintColor = [UIColor colorWithRed:253/255.0 green:205/255.0 blue:64/255.0 alpha:1];
+   self.progressView2.progressSecondTintColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:10/255.0 alpha:1];
+   
+   self.progressView2.stripeWidth = 12;
+   self.progressView2.distanceBetweenTopAndBottomRightCorner = 20;
+   self.progressView2.progressImageInset = 2;
+   
+   [self showProg];
+   
+   
+   CGRect frame3 = self.progressView3.frame;
+   frame3.size.height = 30;
+   [self.progressView3 setFrame:frame3];
+   
+   self.progressView3.verticalDarkGradient = YES;
+   
+   self.progressView3.whiteStripes = YES;
+   
+   
+   self.progressView3.progressTintColor = [UIColor colorWithRed:253/255.0 green:205/255.0 blue:64/255.0 alpha:1];
+   self.progressView3.progressSecondTintColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:10/255.0 alpha:1];
+   
+   self.progressView3.stripeWidth = 12;
+   self.progressView3.distanceBetweenTopAndBottomRightCorner = 20;
+   self.progressView3.progressImageInset = 2;
+   
+   [self showProg3];
 }
+
+
+- (void)showProg {
+   self.progressView2.progress = 0;
+   
+//   self.progressView2.animationTrackProgressDelay = 0.01f;
+//   self.progressView2.animationTrackProgressIncrement = 0.01f;
+//   [self.progressView2 showProgress:1 animated:YES];
+//   [self performSelector:@selector(showProg) withObject:nil afterDelay:1];
+}
+
+- (void)showProg3 {
+   self.progressView3.progress = 0;
+   
+   self.progressView3.animationTrackProgressDelay = 0.03f;
+   self.progressView3.animationTrackProgressIncrement = 0.01f;
+   [self.progressView3 showAnimatedProgressWithTimer:1];
+}
+
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
