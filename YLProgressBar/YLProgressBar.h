@@ -62,6 +62,9 @@
 // by default, hide
 @property (nonatomic, assign) BOOL showGloss;
 
+// by default, hide
+@property (nonatomic, assign) BOOL showGlow;
+
 // by default 7
 @property (nonatomic, assign) NSInteger stripeWidth;
 
@@ -72,6 +75,9 @@
 
 // by default 1
 @property (nonatomic, assign) NSInteger progressImageInset;
+
+// by default 1
+@property (nonatomic, assign) NSInteger backgroundStrokeSize;
 
 // by default, 1/2 of height
 @property (nonatomic, assign) CGFloat cornerRadius;

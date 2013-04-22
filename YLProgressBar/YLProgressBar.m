@@ -27,15 +27,11 @@
 #import "YLProgressBar.h"
 #import "ARCMacro.h"
 
-// Colors
-#define YLProgressBarColorBackground        [UIColor colorWithRed:0.0980f green:0.1137f blue:0.1294f alpha:1.0f]
-#define YLProgressBarColorBackgroundGlow    [UIColor colorWithRed:0.0666f green:0.0784f blue:0.0901f alpha:1.0f]
-
-
 @interface YLProgressBar () {
     UIColor *_progressTintColor;
     UIColor *_progressSecondTintColor;
 }
+
 @property (nonatomic, assign) double progressOffset;
 
 /** Init the progress bar. */
@@ -77,6 +73,10 @@
 
     SAFE_ARC_RELEASE (_progressTintColor);
     SAFE_ARC_RELEASE (_progressSecondTintColor);
+
+    SAFE_ARC_RELEASE (_backgroundFillColor);
+    SAFE_ARC_RELEASE (_backgroundGlowColor);
+    SAFE_ARC_RELEASE (_backgroundStrokeColor);
 
     SAFE_ARC_SUPER_DEALLOC ();
 }
@@ -252,10 +252,15 @@
     self.animationTimer = nil;
     self.growingTimer = nil;
     self.animated = YES;
+    self.showGlow = NO;
     self.stripeWidth = 7;
     self.distanceBetweenTopAndBottomRightCorner = 8;
     self.progressImageInset = 1;
+    self.backgroundStrokeSize = 2;
     self.cornerRadius = self.frame.size.height / 2;
+    self.backgroundFillColor = [UIColor colorWithRed:0.0980f green:0.1137f blue:0.1294f alpha:1.0f];
+    self.backgroundStrokeColor = [UIColor colorWithRed:0.0980f green:0.1137f blue:0.1294f alpha:1.0f];
+    self.backgroundGlowColor = [UIColor colorWithRed:0.0666f green:0.0784f blue:0.0901f alpha:1.0f];
 }
 
 
@@ -280,28 +285,33 @@
 
     CGContextSaveGState(context);
     {
-        // Draw the white shadow
-        [[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2] set];
-
-        UIBezierPath *shadow = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5, 0, rect.size.width - 1, rect.size.height - 1)
-                                                          cornerRadius:self.cornerRadius];
-        [shadow stroke];
-
         // Draw the track
-        [YLProgressBarColorBackground set];
+        [self.backgroundStrokeColor set];
 
-        UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height - 1) cornerRadius:self.cornerRadius];
+        CGRect trackRect = CGRectMake(0, 0, rect.size.width, rect.size.height - 1);
+        UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:trackRect cornerRadius:self.cornerRadius];
         [roundedRect fill];
+        
+        // Draw the content
+        [self.backgroundFillColor set];
 
-        // Draw the inner glow
-        [YLProgressBarColorBackgroundGlow set];
+        NSInteger inset = self.backgroundStrokeSize;
+        CGRect contentRect = CGRectInset(trackRect, inset, inset);
 
-        CGMutablePathRef glow = CGPathCreateMutable();
-        CGPathMoveToPoint(glow, NULL, self.cornerRadius, 0);
-        CGPathAddLineToPoint(glow, NULL, rect.size.width - self.cornerRadius, 0);
-        CGContextAddPath(context, glow);
-        CGContextDrawPath(context, kCGPathStroke);
-        CGPathRelease(glow);
+        UIBezierPath *innerRect = [UIBezierPath bezierPathWithRoundedRect:contentRect cornerRadius:self.cornerRadius];
+        [innerRect fill];
+
+        if ( self.showGlow ) {
+            // Draw the inner glow
+            [self.backgroundGlowColor set];
+
+            CGMutablePathRef glow = CGPathCreateMutable();
+            CGPathMoveToPoint(glow, NULL, self.cornerRadius, 0);
+            CGPathAddLineToPoint(glow, NULL, rect.size.width - self.cornerRadius, 0);
+            CGContextAddPath(context, glow);
+            CGContextDrawPath(context, kCGPathStroke);
+            CGPathRelease(glow);
+        }
     }
     CGContextRestoreGState(context);
 }

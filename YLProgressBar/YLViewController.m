@@ -71,38 +71,45 @@
     self.progressView.verticalDarkGradient = YES;
     self.progressView.whiteStripes = YES;
 
-    self.progressView.progressTintColor = [UIColor colorWithRed:129/255.0 green:180/255.0 blue:218/255.0 alpha:1];
-    self.progressView.progressSecondTintColor = [UIColor colorWithRed:127/255.0 green:160/255.0 blue:185/255.0 alpha:1];
+    self.progressView.progressTintColor = [UIColor colorWithRed:88/255.0 green:155/255.0 blue:207/255.0 alpha:0.6];
+    self.progressView.progressSecondTintColor = [UIColor colorWithRed:0/255.f green:63/255.f blue:110/255.f alpha:0.6];
+
+    self.progressView.backgroundStrokeColor = [UIColor colorWithRed:127/255.f green:164/255.f blue:191/255.f alpha:1];
+    self.progressView.backgroundFillColor = [UIColor colorWithRed:244/255.f green:247/255.f blue:250/255.f alpha:1];
+//    self.progressView.animated = NO;
 
     self.progressView.stripeWidth = 5;
     self.progressView.distanceBetweenTopAndBottomRightCorner = 20;
-    self.progressView.progressImageInset = 2;
+    self.progressView.progressImageInset = 0;
     self.progressView.cornerRadius = 4;
 
-    self.progressView.progress = 0.5;
+    self.progressView.progress = 0.4;
 
-    self.progressView.animationTrackProgressDelay = 0.f;
-    self.progressView.animationTrackProgressIncrement = 0.0f;
-//    [self.progressView showAnimatedProgressWithTimer:1];
+    self.progressView.animationTrackProgressDelay = 0.04f;
+    self.progressView.animationTrackProgressIncrement = 0.001f;
+    [self.progressView showAnimatedProgressWithTimer:1];
 //   
 
     CGRect frame2 = self.progressView2.frame;
-    frame2.size.height = 30;
+    frame2.size.height = 24;
     [self.progressView2 setFrame:frame2];
 
     self.progressView2.verticalDarkGradient = YES;
+    self.progressView2.whiteStripes = NO;
 
-    self.progressView2.whiteStripes = YES;
+    self.progressView2.progressTintColor = [UIColor colorWithRed:88/255.0 green:183/255.0 blue:254/255.0 alpha:0.5];
+    self.progressView2.progressSecondTintColor = [UIColor colorWithRed:0/255.0 green:88/255.0 blue:154/255.0 alpha:0.5];
 
+    self.progressView2.backgroundStrokeColor = [UIColor colorWithRed:127/255.f green:164/255.f blue:191/255.f alpha:1];
+    self.progressView2.backgroundFillColor = [UIColor colorWithRed:244/255.f green:247/255.f blue:250/255.f alpha:1];
+//    self.progressView2.animated = NO;
 
-    self.progressView2.progressTintColor = [UIColor colorWithRed:253/255.0 green:205/255.0 blue:64/255.0 alpha:1];
-    self.progressView2.progressSecondTintColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:10/255.0 alpha:1];
-
-    self.progressView2.stripeWidth = 12;
+    self.progressView2.stripeWidth = 5;
     self.progressView2.distanceBetweenTopAndBottomRightCorner = 20;
-    self.progressView2.progressImageInset = 2;
+    self.progressView2.progressImageInset = 0;
 
-    [self showProg];
+    self.progressView2.progress = 0.6;
+//    [self showProg];
 
 
     CGRect frame3 = self.progressView3.frame;
@@ -121,7 +128,7 @@
     self.progressView3.distanceBetweenTopAndBottomRightCorner = 20;
     self.progressView3.progressImageInset = 2;
 
-    [self showProg3];
+//    [self showProg3];
 }
 
 
