@@ -48,6 +48,11 @@
 @property (nonatomic, retain) UIColor *progressTintColor;
 @property (nonatomic, retain) UIColor *progressSecondTintColor;
 
+// BackgroundColor
+@property (nonatomic, retain) UIColor *backgroundFillColor;
+@property (nonatomic, retain) UIColor *backgroundStrokeColor;
+@property (nonatomic, retain) UIColor *backgroundGlowColor;
+
 // by default, is horizontal
 @property (nonatomic, assign) BOOL verticalDarkGradient;
 
